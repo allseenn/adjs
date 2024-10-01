@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn">get news</button>
+    <div class="news"></div>
+    <script>
+        const news = [
+            "Donald Trump is the president of the United States",
+            "The United States is the country with the most people",
+            "Russia is the biggest country in the world"
+        ];
+        const btn = document.querySelector('.btn');
+        const newsDiv = document.querySelector('.news');
+        let fetchNews = () => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const p = document.createElement('p');
+                    if(Math.random() > 0.3) {
+                        resolve(p.textContent = news[Math.floor(Math.random() * news.length)]);  
+                    }
+                    else {
+                        p.setAttribute('style', 'color: red'); 
+                        reject(p.textContent = 'Ошибка загрузки новостей');
+                    }
+                    newsDiv.appendChild(p)
+
+                }, 1000);
+            });
+        }
+        btn.addEventListener('click', () => {
+            fetchNews()
+            .then((result) => {
+                
+            }).catch((err) => {
+                
+            });
+    
+        });
+    </script>
+</body>
+</html>

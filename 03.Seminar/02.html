@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="note">
+    <button type="submit" class="save">Save</button>
+    <button type="submit" class="load">Load</button>
+    <button type="submit" class="clean">Clean</button>
+    <ol class="list">
+    </ol>
+    <script>
+        const note = document.querySelector('.note');
+        const save = document.querySelector('.save');
+        const load = document.querySelector('.load');
+        const clean = document.querySelector('.clean');
+        const list = document.querySelector('.list');
+        save.addEventListener('click', () => {
+            localStorage.setItem( new Date(), note.value);
+        });
+        load.addEventListener('click', () => {
+            for (let key in localStorage) {
+                if (localStorage.hasOwnProperty(key)) {
+                    const li = document.createElement('li');
+                    li.textContent = localStorage[key];
+                    list.appendChild(li);
+                }
+            }
+        });
+        clean.addEventListener('click', () => {
+            localStorage.clear();
+            const liList = list.querySelectorAll('li');
+            liList.forEach(li => li.remove());
+        });
+    </script>
+</body>
+</html>
